@@ -1,49 +1,48 @@
-using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Main.Models;
+using RocketElevatorsAPI.Models;
 
-namespace Lead.Controllers {
-
-    [Route("api/lead")]
+namespace RocketElevatorsAPI.Controllers
+{
+    [Route("api/[controller]")]
     [ApiController]
-
-    public class LeadsController : ControllerBase
+    public class LeadController : ControllerBase
     {
-         private readonly MainContext _context;
-         
-         public LeadsController(MainContext context)
+        // Context
+        private readonly RocketElevatorsContext _context;
+
+        public LeadController(RocketElevatorsContext context)
         {
             _context = context;
+
         }
 
-    [HttpGet]
-        public async Task<ActionResult<IEnumerable<LeadItems>>> GetLeads()
+        // Get full list of leads                                    
+        // https://localhost:3000/api/lead/all
+        // GET: api/lead/all           
+        [HttpGet("all")]
+        public IEnumerable<Lead> GetLeads()
         {
-            return await _context.leads.ToListAsync();
+            IQueryable<Lead> leads =
+            from lead in _context.Leads
+            select lead;
+            return leads.ToList();
+
         }
 
-        [HttpGet("lastmonth")]
-       // https://docs.microsoft.com/en-us/dotnet/csharp/linq/query-expression-basics
-       // Allows the use of queries
-        public IEnumerable<LeadItems> GetLead()
+        // Retrieve list of Leads created in the last 30 days who have not yet become customers                                                       https://localhost:5001/api/lead/notcustomers
+        // https://localhost:3000/api/lead/noncustomers
+        // GET: api/lead         
+        [HttpGet("noncustomers")]
+        public IEnumerable<Lead> GetNonCustomers()
         {
-            double ts = -30;
-           
-
-            //https://stackoverflow.com/questions/17799499/cannot-convert-lambda-expression-to-delegate-type (Lambda operator)
-            // This allows us to fetch all leads recorded in the past 30 days that are not yet customers.
-
-            IQueryable<LeadItems> last = from last30 in _context.leads
-             where last30.created_at >= DateTime.Now.AddDays(ts) && last30.customer_id == null
-             select last30;
-
-            
-            return last;
-            
+            IQueryable<Lead> nonCustomers =
+            from lead in _context.Leads
+            where lead.CreatedAt >= System.DateTime.Now.AddDays(-30)
+            select lead;
+            return nonCustomers.ToList();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RocketElevatorsAPI.Models;
 
@@ -48,9 +49,9 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ElevatorItems>> GetElevators(int id)
+        public async Task<ActionResult<Elevator>> GetElevators(ulong id)
         {
-            var ElevatorItems = await _context.elevators.FindAsync(id);
+            var ElevatorItems = await _context.Elevators.FindAsync(id);
 
             if (ElevatorItems == null)
             {
@@ -59,58 +60,59 @@ namespace RocketElevatorsAPI.Controllers
 
             return ElevatorItems; // We can GET Elevators data with it's ID
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(int id, ElevatorItems elevatorItems)
-        {
-            if (id != elevatorItems.id)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(elevatorItems).State = EntityState.Modified;
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> PutTodoItem(ulong id, Elevator elevator)
+        // {
+        //     if (id != elevator.ID)
+        //     {
+        //         return BadRequest();
+        //     }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ElevatorExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    _context.Entry(elevator).State = EntityState.Modified;
 
-            return Ok(elevatorItems);           
-        } 
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!ElevatorExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
 
-        [HttpPut("updatestatus/{id}")]
-        public async Task<IActionResult> PutElevatorStatus(long id, ElevatorStatus elevator)
-        {
+        //     return Ok(elevator);           
+        // } 
 
-            if (id != elevator.id)
-            {
-                return BadRequest();
-            }
+        // [HttpPut("updatestatus/{id}")]
+        // public async Task<IActionResult> PutElevatorStatus(long id, ElevatorStatus elevator)
+        // {
 
-            var current_elevator = _context.elevators.Find(elevator.id);
-            current_elevator.status = elevator.status;
+        //     if (id != elevator.id)
+        //     {
+        //         return BadRequest();
+        //     }
 
-            if (elevator.status == "Intervention" || elevator.status == "Active" || elevator.status == "Inactive"){
+        //     var current_elevator = _context.Elevators.Find(elevator.id);
+        //     current_elevator.status = elevator.status;
 
-                await _context.SaveChangesAsync();
-                return NoContent();
-            }
+        //     if (elevator.status == "Intervention" || elevator.status == "Active" || elevator.status == "Inactive"){
 
-            else
-            {
-                return BadRequest();
-            }
-        }
+        //         await _context.SaveChangesAsync();
+        //         return NoContent();
+        //     }
+
+        //     else
+        //     {
+        //         return BadRequest();
+        //     }
+        // }
 
 
 

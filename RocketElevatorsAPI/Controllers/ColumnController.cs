@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RocketElevatorsAPI.Models;
 
 namespace Column.Controllers {
 
-    [Route("api/column")]
+    [Route("api/[controller]")]
     [ApiController]
 
     public class ColumnsController : ControllerBase
@@ -18,50 +19,50 @@ namespace Column.Controllers {
             _context = context;
         }
 
-    [HttpGet]
-        public async Task<ActionResult<IEnumerable<ColumnItems>>> GetColumns()
-        {
-            return await _context.columns.ToListAsync();
-        }
+    // [HttpGet]
+    //     public async Task<ActionResult<IEnumerable<ColumnItems>>> GetColumns()
+    //     {
+    //         return await _context.columns.ToListAsync();
+    //     }
 
 
-         [HttpGet("{id}")]
-        public async Task<ActionResult<ColumnItems>> GetColumns(int id)
-        {
-            var columnItems = await _context.columns.FindAsync(id);
+    //      [HttpGet("{id}")]
+    //     public async Task<ActionResult<ColumnItems>> GetColumns(int id)
+    //     {
+    //         var columnItems = await _context.columns.FindAsync(id);
 
-            if (columnItems == null)
-            {
-                return NotFound();
-            }
+    //         if (columnItems == null)
+    //         {
+    //             return NotFound();
+    //         }
 
-            return columnItems;
-        }
+    //         return columnItems;
+    //     }
 
-         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(int id, ColumnItems columnItems)
-        {
-            if (id != columnItems.id)
-            {
-                return BadRequest();
-            }
+    //     [HttpPut("{id}")]
+    //     public async Task<IActionResult> PutTodoItem(int id, ColumnItems columnItems)
+    //     {
+    //         if (id != columnItems.id)
+    //         {
+    //             return BadRequest();
+    //         }
 
-            _context.Entry(columnItems).State = EntityState.Modified;
+    //         _context.Entry(columnItems).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ColumnExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+    //         try
+    //         {
+    //             await _context.SaveChangesAsync();
+    //         }
+    //         catch (DbUpdateConcurrencyException)
+    //         {
+    //             if (!ColumnExists(id))
+    //             {
+    //                 return NotFound();
+    //             }
+    //             else
+    //             {
+    //                 throw;
+    //             }
+    //         }
     }
 }

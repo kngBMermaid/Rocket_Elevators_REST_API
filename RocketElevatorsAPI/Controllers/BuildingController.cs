@@ -1,7 +1,12 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RocketElevatorsAPI.Models;
+
+// using Microsoft.EntityFrameworkCore;
+// using MySql.Data;
+// using MySql.Data.MySqlClient;
 
 namespace RocketElevatorsAPI.Controllers
 {
@@ -42,7 +47,7 @@ namespace RocketElevatorsAPI.Controllers
             join battery in _context.Batteries on building.ID equals battery.BuildingID
             join column in _context.Columns on battery.ID equals column.BatteryID
             join elevator in _context.Elevators on column.ID equals elevator.ColumnID
-            where elevator.Status = "intervention" || column.Status == "intervention" || battery.Status == "intervention"
+            where elevator.Status == "intervention" || column.Status == "intervention" || battery.Status == "intervention"
             select building;
             return buildings.ToList();
         }

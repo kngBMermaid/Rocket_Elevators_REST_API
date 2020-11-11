@@ -85,8 +85,7 @@ namespace RocketElevatorsAPI.Controllers
                 }
             }
 
-            return Ok(elevatorItems);           // This is where we set our put method, you can add elevators 
-                                                // to the database through postman.
+            return Ok(elevatorItems);           
         } 
 
         [HttpPut("updatestatus/{id}")]

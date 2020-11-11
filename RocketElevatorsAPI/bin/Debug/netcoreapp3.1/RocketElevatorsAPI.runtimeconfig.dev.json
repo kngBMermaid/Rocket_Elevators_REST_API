@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/mermaid/.dotnet/store/|arch|/|tfm|",
+      "/home/mermaid/.nuget/packages"
+    ]
+  }
+}

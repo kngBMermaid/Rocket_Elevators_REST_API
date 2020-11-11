@@ -19,53 +19,42 @@ namespace Battery.Controllers {
             _context = context;
         }
 
-    // [HttpGet]
-    //     public async Task<ActionResult<IEnumerable<BatteryItems>>> GetBatteries()
-    //     {
-    //         return await _context.batteries.ToListAsync();
-    //     }
+    [HttpGet]
+        public async Task<ActionResult<IEnumerable<BatteryItems>>> GetBatteries()
+        {
+            return await _context.batteries.ToListAsync();
+        }
 
 
-    //      [HttpGet("{id}")]
-    //     public async Task<ActionResult<BatteryItems>> GetBatteries(int id)
-    //     {
-    //         var batteryItems = await _context.batteries.FindAsync(id);
+         [HttpGet("{id}")]
+        public async Task<ActionResult<BatteryItems>> GetBatteries(int id)
+        {
+            var batteryItems = await _context.batteries.FindAsync(id);
 
-    //         if (batteryItems == null)
-    //         {
-    //             return NotFound();
-    //         }
+            if (batteryItems == null)
+            {
+                return NotFound();
+            }
 
-    //         return batteryItems;  
-    //     } 
-    //         [HttpPut("{id}")]
-    //     public async Task<IActionResult> PutTodoItem(int id, BatteryItems batteryItems)
-    //     {
-    //         if (id != batteryItems.id)
-    //         {
-    //             return BadRequest();
-    //         }
+            return batteryItems;  
+        } 
+            [HttpPut("{id}")]
+        public async Task<IActionResult> PutTodoItem(int id, BatteryItems batteryItems)
+        {
+            if (id != batteryItems.id)
+            {
+                return BadRequest();
+            }
 
-    //         _context.Entry(batteryItems).State = EntityState.Modified;
+            _context.Entry(batteryItems).State = EntityState.Modified;
 
-    //         try
-    //         {
-    //             await _context.SaveChangesAsync();
-    //         }
-    //         catch (DbUpdateConcurrencyException)
-    //         {
-    //             if (!BatteryExists(id))
-    //             {
-    //                 return NotFound();
-    //             }
-    //             else
-    //             {
-    //                 throw;
-    //             }
-    //         }
-
-    //         return Ok(batteryItems);   
-    //     }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+           
+            return Ok(batteryItems);   
+        }
 
 
     }

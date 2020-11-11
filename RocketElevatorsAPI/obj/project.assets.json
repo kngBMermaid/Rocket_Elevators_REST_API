@@ -5672,24 +5672,24 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Microsoft.EntityFrameworkCore.InMemory >= *",
+      "Microsoft.EntityFrameworkCore.InMemory >= 3.1.9",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.9"
     ]
   },
   "packageFolders": {
-    "/home/god/.nuget/packages/": {}
+    "/home/mermaid/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
+      "projectUniqueName": "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
       "projectName": "RocketElevatorsAPI",
-      "projectPath": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
-      "packagesPath": "/home/god/.nuget/packages/",
-      "outputPath": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/obj/",
+      "projectPath": "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
+      "packagesPath": "/home/mermaid/.nuget/packages/",
+      "outputPath": "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/god/.nuget/NuGet/NuGet.Config"
+        "/home/mermaid/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5713,7 +5713,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",
-            "version": "[*, )"
+            "version": "[3.1.9, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",

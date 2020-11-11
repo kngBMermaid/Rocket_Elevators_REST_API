@@ -61,58 +61,47 @@ namespace RocketElevatorsAPI.Controllers
             return ElevatorItems; // We can GET Elevators data with it's ID
         }
 
-        // [HttpPut("{id}")]
-        // public async Task<IActionResult> PutTodoItem(ulong id, Elevator elevator)
-        // {
-        //     if (id != elevator.ID)
-        //     {
-        //         return BadRequest();
-        //     }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTodoItem(ulong id, Elevator elevator)
+        {
+            if (id != elevator.ID)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(elevator).State = EntityState.Modified;
+           _context.Entry(elevator).State = EntityState.Modified;
 
-        //     try
-        //     {
-        //         await _context.SaveChangesAsync();
-        //     }
-        //     catch (DbUpdateConcurrencyException)
-        //     {
-        //         if (!ElevatorExists(id))
-        //         {
-        //             return NotFound();
-        //         }
-        //         else
-        //         {
-        //             throw;
-        //         }
-        //     }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+        
+            return Ok(elevator);           
+        } 
 
-        //     return Ok(elevator);           
-        // } 
+        [HttpPut("updatestatus/{id}")]
+        public async Task<IActionResult> PutElevatorStatus(long id, ElevatorStatus elevator)
+        {
 
-        // [HttpPut("updatestatus/{id}")]
-        // public async Task<IActionResult> PutElevatorStatus(long id, ElevatorStatus elevator)
-        // {
+            if (id != elevator.id)
+            {
+                return BadRequest();
+            }
 
-        //     if (id != elevator.id)
-        //     {
-        //         return BadRequest();
-        //     }
+            var current_elevator = _context.Elevators.Find(elevator.id);
+            current_elevator.status = elevator.status;
 
-        //     var current_elevator = _context.Elevators.Find(elevator.id);
-        //     current_elevator.status = elevator.status;
+            if (elevator.status == "Intervention" || elevator.status == "Active" || elevator.status == "Inactive"){
 
-        //     if (elevator.status == "Intervention" || elevator.status == "Active" || elevator.status == "Inactive"){
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
 
-        //         await _context.SaveChangesAsync();
-        //         return NoContent();
-        //     }
-
-        //     else
-        //     {
-        //         return BadRequest();
-        //     }
-        // }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
 
 

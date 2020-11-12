@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RocketElevatorsAPI.Models;
 
 namespace RocketElevatorsAPI.Controllers
@@ -34,7 +35,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         // Retriving Status of All the Elevators not active             
-        // https://localhost:3000/api/elevator/notinoperation
+        // https://localhost:3000/api/elevator/inoperational
         // GET: api/elevator/inoperational           
 
         [HttpGet("inoperational")]
@@ -44,66 +45,50 @@ namespace RocketElevatorsAPI.Controllers
             from elevator in _context.Elevators
             where elevator.Status.ToLower() != "active" // Gets elevators with either "Inactive" or "Intervention" status
             select elevator;
-
             return elevators.ToList();
         }
 
+        // Get status of specific elevator
+        // http://localhost:3000/api/elevators/{id}
+        // GET: api/elevators/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Elevator>> GetElevators(ulong id)
+        public string GetStatus(ulong id)
         {
-            var ElevatorItems = await _context.Elevators.FindAsync(id);
-
-            if (ElevatorItems == null)
-            {
-                return NotFound();
-            }
-
-            return ElevatorItems; // We can GET Elevators data with it's ID
+            var elevators = _context.Elevators.Where(elevator => elevator.ID == id).ToList();
+            return elevators[0].Status;
         }
 
+         // Change status of specific elevator
+        // http://localhost:3000/api/elevator/{id}
+        // PUT api/elevators/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(ulong id, Elevator elevator)
+        public async Task<IActionResult> PutStatus(ulong id, Elevator elevator)
         {
             if (id != elevator.ID)
             {
                 return BadRequest();
             }
 
-           _context.Entry(elevator).State = EntityState.Modified;
+            _context.Entry(elevator).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-        
-            return Ok(elevator);           
-        } 
-
-        [HttpPut("updatestatus/{id}")]
-        public async Task<IActionResult> PutElevatorStatus(long id, ElevatorStatus elevator)
-        {
-
-            if (id != elevator.id)
+            catch (DbUpdateConcurrencyException)
             {
-                return BadRequest();
+                if (id != elevator.ID)
+                {
+                    // Resource doesn't exist.
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
-
-            var current_elevator = _context.Elevators.Find(elevator.id);
-            current_elevator.status = elevator.status;
-
-            if (elevator.status == "Intervention" || elevator.status == "Active" || elevator.status == "Inactive"){
-
-                await _context.SaveChangesAsync();
-                return NoContent();
-            }
-
-            else
-            {
-                return BadRequest();
-            }
+           
+            return  Content("Status of Elevator with ID #" + elevator.ID + ": changed status to " + elevator.Status);  
         }
-
-
-
     }
 }

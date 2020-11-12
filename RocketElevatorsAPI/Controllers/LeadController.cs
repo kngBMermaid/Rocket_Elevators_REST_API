@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RocketElevatorsAPI.Models;
+using RocketElevatorsAPI.Data;
 
 namespace RocketElevatorsAPI.Controllers
 {

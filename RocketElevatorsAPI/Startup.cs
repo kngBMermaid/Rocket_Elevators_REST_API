@@ -1,8 +1,13 @@
+using System;
+using RocketElevatorsAPI.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace RocketElevatorsAPI
 {
@@ -19,6 +24,17 @@ namespace RocketElevatorsAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<RocketElevatorsContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(
+                        Configuration.GetConnectionString("DefaultConnection"),
+                        mySqlOptions => mySqlOptions
+                            .ServerVersion(new Version(5, 7, 31), ServerType.MySql)
+                            .CharSetBehavior(CharSetBehavior.NeverAppend))
+
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,14 +45,19 @@ namespace RocketElevatorsAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("Hello World!");
+                });
                 endpoints.MapControllers();
             });
         }

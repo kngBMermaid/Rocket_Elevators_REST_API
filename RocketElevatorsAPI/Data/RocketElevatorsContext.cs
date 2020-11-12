@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-namespace RocketElevatorsAPI.Models
+using RocketElevatorsAPI.Models;
+
+namespace RocketElevatorsAPI.Data
 {
     public class RocketElevatorsContext : DbContext
     {

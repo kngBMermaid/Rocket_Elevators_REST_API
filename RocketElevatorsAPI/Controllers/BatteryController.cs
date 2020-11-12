@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RocketElevatorsAPI.Models;
+using RocketElevatorsAPI.Data;
 
 namespace RocketElevatorsAPI.Controllers {
 

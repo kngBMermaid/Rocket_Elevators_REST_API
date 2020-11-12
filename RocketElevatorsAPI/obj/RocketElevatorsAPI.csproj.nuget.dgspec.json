@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {}
+    "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {}
   },
   "projects": {
-    "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {
+    "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
+        "projectUniqueName": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
         "projectName": "RocketElevatorsAPI",
-        "projectPath": "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
-        "packagesPath": "/home/mermaid/.nuget/packages/",
-        "outputPath": "/home/mermaid/Week8/RESTAPI/Rocket_Elevators_REST/RocketElevatorsAPI/obj/",
+        "projectPath": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
+        "packagesPath": "/home/god/.nuget/packages/",
+        "outputPath": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/mermaid/.nuget/NuGet/NuGet.Config"
+          "/home/god/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -36,13 +36,25 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[1.1.1, )"
+            },
+            "Microsoft.Bcl.AsyncInterfaces": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[5.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[3.1.9, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[3.2.4, )"
             }
           },
           "imports": [

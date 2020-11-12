@@ -38,7 +38,7 @@
           "dependencies": {
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[*, )"
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",

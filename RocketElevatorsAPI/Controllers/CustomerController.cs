@@ -23,7 +23,7 @@ namespace RocketElevatorsAPI.Controllers
         // Get full list of customers                                   
         // https://localhost:5000/api/customer/all
         // GET: api/customer/all  
-        /*         
+              
         [HttpGet("all")]
         public IEnumerable<Customer> GetCustomers()
         {
@@ -33,6 +33,5 @@ namespace RocketElevatorsAPI.Controllers
             return customers.ToList();
 
         }
-        */
     }
 }

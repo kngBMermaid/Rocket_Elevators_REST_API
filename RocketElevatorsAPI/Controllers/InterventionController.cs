@@ -9,26 +9,26 @@ namespace RocketElevatorsAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressController : ControllerBase
+    public class InterventionController : ControllerBase
     {
         // Context
         private readonly RocketElevatorsContext _context;
 
-        public AddressController(RocketElevatorsContext context)
+        public InterventionController(RocketElevatorsContext context)
         {
             _context = context;
 
         }
 
-        // Get full list of addresses                                   
+        // Get full list of interventions                                    
          
         [HttpGet("all")]
-        public IEnumerable<Address> GetAddresses()
+        public IEnumerable<Intervention> GetInterventions()
         {
-            IQueryable<Address> addresses =
-            from address in _context.Addresses
-            select address;
-            return addresses.ToList();
+            IQueryable<Intervention> interventions =
+            from intervention in _context.Interventions
+            select intervention;
+            return interventions.ToList();
 
         }
         

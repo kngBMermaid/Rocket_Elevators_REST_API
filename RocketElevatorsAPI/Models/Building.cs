@@ -8,9 +8,8 @@ namespace RocketElevatorsAPI.Models
     [Table("buildings")]
     public class Building
     {
-
-        
         // Properties
+        
         [Key]
         public ulong Id { get; set; }
 

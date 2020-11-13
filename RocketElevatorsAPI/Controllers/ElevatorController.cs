@@ -55,7 +55,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpGet("{id}")]
         public string GetStatus(ulong id)
         {
-            var elevators = _context.Elevators.Where(elevator => elevator.ID == id).ToList();
+            var elevators = _context.Elevators.Where(elevator => elevator.Id == id).ToList();
             return elevators[0].Status;
         }
 
@@ -65,7 +65,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStatus(ulong id, Elevator elevator)
         {
-            if (id != elevator.ID)
+            if (id != elevator.Id)
             {
                 return BadRequest();
             }
@@ -78,7 +78,7 @@ namespace RocketElevatorsAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (id != elevator.ID)
+                if (id != elevator.Id)
                 {
                     // Resource doesn't exist.
                     return NotFound();
@@ -89,7 +89,7 @@ namespace RocketElevatorsAPI.Controllers
                 }
             }
            
-            return  Content("Status of Elevator with ID #" + elevator.ID + ": changed status to " + elevator.Status);  
+            return  Content("Status of Elevator with ID #" + elevator.Id + ": changed status to " + elevator.Status);  
         }
     }
 }

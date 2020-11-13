@@ -1,3 +1,5 @@
+using System;
+using System.Xml;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -33,17 +35,48 @@ namespace RocketElevatorsAPI.Controllers
 
         }
 
-        // Retrieve list of Leads created in the last 30 days who have not yet become customers                                                       https://localhost:5001/api/lead/notcustomers
+        // Retrieve list of Leads created in the last 30 days who have not yet become customers                                                      
         // https://localhost:5000/api/lead/noncustomers
-        // GET: api/lead         
+        // GET: api/lead/noncustomers         
         [HttpGet("noncustomers")]
         public IEnumerable<Lead> GetNonCustomers()
         {
-            IQueryable<Lead> nonCustomers =
+            IQueryable<Lead> leads = _context.Leads;
+            var nonCustomers = leads.Where(lead => lead.CreatedAt >= System.DateTime.UtcNow.AddDays(-30));
+            return nonCustomers.ToList();
+
+
+
+            /*
             from lead in _context.Leads
-            where lead.CreatedAt >= System.DateTime.Now.AddDays(-30)
+            where !(from customer in _context.Customers
+                    select customer.EmailCompanyContact).Contains(lead.Email)
             select lead;
             return nonCustomers.ToList();
+
+            /*lead.CreatedAt >= System.DateTime.Now.AddDays(-30)
+            select lead;
+            return nonCustomers.ToList();
+            */
         }
+
+        /*
+            where !(from c in _context.Customers select c.UserId).Contains(lead.UserId)
+            // the last 30 days
+            && lead.CreatedAt >= DateTime.UtcNow.AddDays(-30)
+            select lead;
+
+            return Leads.ToList();
+
+            IEnumerable<Leads> Leads =
+            from lead in _context.Leads
+                // we select all the leads made it by non customers 
+            where !(from c in _context.Customers select c.UserId).Contains(lead.UserId)
+            // the last 30 days
+            && lead.CreatedAt >= DateTime.UtcNow.AddDays(-30)
+            select lead;
+
+            return Leads.ToList();
+        */
     }
 }

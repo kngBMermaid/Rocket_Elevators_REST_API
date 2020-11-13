@@ -11,5 +11,10 @@ namespace RocketElevatorsAPI.Data
         public DbSet<Column> Columns { get; set; }
         public DbSet<Lead> Leads { get; set; }
         public DbSet<Building> Buildings { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<BuildingDetail> BuildingDetails { get; set; }
+        public DbSet<BuildingDetail> Interventions { get; set; }
     }
 }

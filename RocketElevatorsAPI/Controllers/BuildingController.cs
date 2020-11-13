@@ -13,6 +13,7 @@ namespace RocketElevatorsAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class BuildingController : ControllerBase
     {
         // Context
@@ -45,9 +46,9 @@ namespace RocketElevatorsAPI.Controllers
         {
             IQueryable<Building> buildings = 
             from building in _context.Buildings
-            join battery in _context.Batteries on building.ID equals battery.BuildingID
-            join column in _context.Columns on battery.ID equals column.BatteryID
-            join elevator in _context.Elevators on column.ID equals elevator.ColumnID
+            join battery in _context.Batteries on (building.Id).ToString() equals battery.Building_Id
+            join column in _context.Columns on battery.Id equals column.Battery_Id
+            join elevator in _context.Elevators on column.Id equals elevator.ColumnID
             where elevator.Status == "intervention" || column.Status == "intervention" || battery.Status == "intervention"
             select building;
             return buildings.ToList();

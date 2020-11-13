@@ -16,11 +16,7 @@ namespace RocketElevatorsAPI.Models
         // Properties
 
         [Key]
-        public ulong ID 
-        { 
-            get { return id; }
-            set { id = value; }
-        }
+        public ulong Id { get; set; }
         
         public string Status 
         {
@@ -36,7 +32,7 @@ namespace RocketElevatorsAPI.Models
         }
 
         [ForeignKey("battery_id")]
-        public ulong BatteryID
+        public ulong Battery_Id
         { 
             get { return batteryId; } 
             set { batteryId = value; } 

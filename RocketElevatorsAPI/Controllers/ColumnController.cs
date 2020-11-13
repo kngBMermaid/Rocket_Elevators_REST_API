@@ -13,13 +13,13 @@ namespace RocketElevatorsAPI.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class ColumnsController : ControllerBase
+    public class ColumnController : ControllerBase
     {
 
         // Context
         private readonly RocketElevatorsContext _context;
          
-        public ColumnsController(RocketElevatorsContext context)
+        public ColumnController(RocketElevatorsContext context)
         {
             _context = context;
         }
@@ -43,7 +43,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpGet("{id}")]
         public string GetStatus(ulong id)
         {
-            var columns = _context.Columns.Where(column => column.ID == id).ToList();
+            var columns = _context.Columns.Where(column => column.Id == id).ToList();
             return columns[0].Status;
         }
 
@@ -53,7 +53,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStatus(ulong id, Column column)
         {
-            if (id != column.ID)
+            if (id != column.Id)
             {
                 return BadRequest();
             }
@@ -66,7 +66,7 @@ namespace RocketElevatorsAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (id != column.ID)
+                if (id != column.Id)
                 {
                     // Resource doesn't exist.
                     return NotFound();
@@ -77,7 +77,7 @@ namespace RocketElevatorsAPI.Controllers
                 }
             }
 
-            return Content("Status of Column with ID #" + column.ID + ": changed status to " + column.Status);
+            return Content("Status of Column with ID #" + column.Id + ": changed status to " + column.Status);
         }
     }
 }

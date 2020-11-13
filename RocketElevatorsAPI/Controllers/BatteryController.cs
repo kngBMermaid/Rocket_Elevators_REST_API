@@ -24,8 +24,8 @@ namespace RocketElevatorsAPI.Controllers {
         }
 
         // Get full list of batteries                                  
-        // http://localhost:3000/api/batteries/all
-        // GET: api/batteries/all           
+        // http://localhost:3000/api/battery/all
+        // GET: api/battery/all           
         [HttpGet("all")]
         public IEnumerable<Battery> GetBatteries()
         {
@@ -42,7 +42,7 @@ namespace RocketElevatorsAPI.Controllers {
         [HttpGet("{id}")]
         public string GetStatus(ulong id)
         {
-            var batteries = _context.Batteries.Where(battery => battery.ID == id).ToList();
+            var batteries = _context.Batteries.Where(battery => battery.Id == id).ToList();
             return batteries[0].Status;
         }
 
@@ -52,7 +52,7 @@ namespace RocketElevatorsAPI.Controllers {
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStatus(ulong id, Battery battery)
         {
-            if (id != battery.ID)
+            if (id != battery.Id)
             {
                 return BadRequest();
             }
@@ -65,7 +65,7 @@ namespace RocketElevatorsAPI.Controllers {
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (id != battery.ID)
+                if (id != battery.Id)
                 {
                     // Resource doesn't exist.
                     return NotFound();
@@ -76,7 +76,7 @@ namespace RocketElevatorsAPI.Controllers {
                 }
             }
            
-            return  Content("Status of Battery with ID #" + battery.ID + ": changed status to " + battery.Status);  
+            return  Content("Status of Battery with ID #" + battery.Id + ": changed status to " + battery.Status);  
         }
 
 

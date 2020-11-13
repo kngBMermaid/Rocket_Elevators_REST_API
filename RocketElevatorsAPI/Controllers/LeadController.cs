@@ -49,49 +49,6 @@ namespace RocketElevatorsAPI.Controllers
             select lead;
             return nonCustomers.ToList();
 
-            /*lead.CreatedAt >= System.DateTime.Now.AddDays(-30)
-            select lead;
-            return nonCustomers.ToList();
-
-            /*
-            IEnumerable<Customer> customers = _context.Customers;
-
-            var nonCustomers = leads.Where(lead => lead.CreatedAt >= System.DateTime.UtcNow.AddDays(-30) && lead.Email != customers.);
-            return nonCustomers.ToList();
-            */
-
-
-
-            /*
-            from lead in _context.Leads
-            where !(from customer in _context.Customers
-                    select customer.EmailCompanyContact).Contains(lead.Email)
-            select lead;
-            return nonCustomers.ToList();
-
-            /*lead.CreatedAt >= System.DateTime.Now.AddDays(-30)
-            select lead;
-            return nonCustomers.ToList();
-            */
         }
-
-        /*
-            where !(from c in _context.Customers select c.UserId).Contains(lead.UserId)
-            // the last 30 days
-            && lead.CreatedAt >= DateTime.UtcNow.AddDays(-30)
-            select lead;
-
-            return Leads.ToList();
-
-            IEnumerable<Leads> Leads =
-            from lead in _context.Leads
-                // we select all the leads made it by non customers 
-            where !(from c in _context.Customers select c.UserId).Contains(lead.UserId)
-            // the last 30 days
-            && lead.CreatedAt >= DateTime.UtcNow.AddDays(-30)
-            select lead;
-
-            return Leads.ToList();
-        */
     }
 }

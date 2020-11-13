@@ -23,7 +23,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         // Get full list of elevators                                   
-        // https://localhost:3000/api/elevator/all
+        // https://localhost:5000/api/elevator/all
         // GET: api/elevator/all           
         [HttpGet("all")]
         public IEnumerable<Elevator> GetElevators()
@@ -36,7 +36,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         // Retriving Status of All the Elevators not active             
-        // https://localhost:3000/api/elevator/inoperational
+        // https://localhost:5000/api/elevator/inoperational
         // GET: api/elevator/inoperational           
 
         [HttpGet("inoperational")]
@@ -50,7 +50,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         // Get status of specific elevator
-        // http://localhost:3000/api/elevators/{id}
+        // http://localhost:5000/api/elevators/{id}
         // GET: api/elevators/{id}
         [HttpGet("{id}")]
         public string GetStatus(ulong id)
@@ -60,10 +60,10 @@ namespace RocketElevatorsAPI.Controllers
         }
 
          // Change status of specific elevator
-        // http://localhost:3000/api/elevator/{id}
+        // http://localhost:5000/api/elevator/{id}
         // PUT api/elevators/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStatus(ulong id, Elevator elevator)
+        public async Task<IActionResult> PutStatus(ulong id, [FromBody] Elevator elevator)
         {
             if (id != elevator.Id)
             {
@@ -71,6 +71,21 @@ namespace RocketElevatorsAPI.Controllers
             }
 
             _context.Entry(elevator).State = EntityState.Modified;
+
+            // Columns that we don't want to change
+            _context.Entry(elevator).Property(p => p.Id).IsModified                    = false;
+            _context.Entry(elevator).Property(p => p.Column_Id).IsModified             = false;
+            _context.Entry(elevator).Property(p => p.Customer_Id).IsModified           = false;
+            _context.Entry(elevator).Property(p => p.SerialNumber).IsModified          = false;
+            _context.Entry(elevator).Property(p => p.Model).IsModified                 = false;
+            _context.Entry(elevator).Property(p => p.BuildingType).IsModified          = false;
+            _context.Entry(elevator).Property(p => p.CommissioningDate).IsModified     = false;
+            _context.Entry(elevator).Property(p => p.LastInspectionDate).IsModified    = false;
+            _context.Entry(elevator).Property(p => p.InspectionCertificate).IsModified = false;
+            _context.Entry(elevator).Property(p => p.Information).IsModified           = false;
+            _context.Entry(elevator).Property(p => p.Notes).IsModified                 = false;
+            _context.Entry(elevator).Property(p => p.CreatedAt).IsModified             = false;
+            _context.Entry(elevator).Property(p => p.UpdatedAt).IsModified             = false;
 
             try
             {
@@ -89,6 +104,7 @@ namespace RocketElevatorsAPI.Controllers
                 }
             }
            
+            var dbElevator = _context.Elevators.FirstOrDefault(elevator => elevator.Id == id);          
             return  Content("Status of Elevator with ID #" + elevator.Id + ": changed status to " + elevator.Status);  
         }
     }

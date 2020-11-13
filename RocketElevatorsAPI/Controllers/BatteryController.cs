@@ -24,7 +24,7 @@ namespace RocketElevatorsAPI.Controllers {
         }
 
         // Get full list of batteries                                  
-        // http://localhost:3000/api/battery/all
+        // http://localhost:5000/api/battery/all
         // GET: api/battery/all           
         [HttpGet("all")]
         public IEnumerable<Battery> GetBatteries()
@@ -37,7 +37,7 @@ namespace RocketElevatorsAPI.Controllers {
         }
 
         // Get status of specific battery
-        // http://localhost:3000/api/batteries/{id}
+        // http://localhost:5000/api/batteries/{id}
         // GET: api/batteries/{id}
         [HttpGet("{id}")]
         public string GetStatus(ulong id)
@@ -47,10 +47,10 @@ namespace RocketElevatorsAPI.Controllers {
         }
 
         // Change status of specific battery
-        // http://localhost:3000/api/batteries/{id}
+        // http://localhost:5000/api/batteries/{id}
         // PUT api/batteries/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStatus(ulong id, Battery battery)
+        public async Task<IActionResult> PutStatus(ulong id, [FromBody] Battery battery)
         {
             if (id != battery.Id)
             {
@@ -58,6 +58,19 @@ namespace RocketElevatorsAPI.Controllers {
             }
 
             _context.Entry(battery).State = EntityState.Modified;
+
+            // Columns that we don't want to change
+            _context.Entry(battery).Property(p => p.Id).IsModified                    = false;
+            _context.Entry(battery).Property(p => p.Building_Id).IsModified           = false;
+            _context.Entry(battery).Property(p => p.Employee_Id).IsModified           = false;
+            _context.Entry(battery).Property(p => p.Customer_Id).IsModified           = false;
+            _context.Entry(battery).Property(p => p.CommissioningDate).IsModified     = false;
+            _context.Entry(battery).Property(p => p.LastInspectionDate).IsModified    = false;
+            _context.Entry(battery).Property(p => p.OperationsCertificate).IsModified = false;
+            _context.Entry(battery).Property(p => p.Information).IsModified           = false;
+            _context.Entry(battery).Property(p => p.Notes).IsModified                 = false;
+            _context.Entry(battery).Property(p => p.CreatedAt).IsModified             = false;
+            _context.Entry(battery).Property(p => p.UpdatedAt).IsModified             = false;
 
             try
             {
@@ -75,8 +88,9 @@ namespace RocketElevatorsAPI.Controllers {
                     throw;
                 }
             }
-           
-            return  Content("Status of Battery with ID #" + battery.Id + ": changed status to " + battery.Status);  
+
+            var dbBattery = _context.Batteries.FirstOrDefault(battery => battery.Id == id);
+            return  Content("Status of Battery with ID #" + dbBattery.Id + ": changed status to " + dbBattery.Status);  
         }
 
 

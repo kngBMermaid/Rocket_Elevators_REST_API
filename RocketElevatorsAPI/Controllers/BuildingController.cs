@@ -49,9 +49,10 @@ namespace RocketElevatorsAPI.Controllers
             join battery in _context.Batteries on (building.Id).ToString() equals battery.Building_Id
             join column in _context.Columns on battery.Id equals column.Battery_Id
             join elevator in _context.Elevators on column.Id equals elevator.Column_Id
-            where elevator.Status == "intervention" || column.Status == "intervention" || battery.Status == "intervention"
+            where elevator.Status.ToLower() == "intervention" || column.Status.ToLower() == "intervention" || column.Status.ToLower() == "intervention"
             select building;
-            return buildings.ToList();
+            return buildings.ToList().Distinct();
+            
         }
 
 

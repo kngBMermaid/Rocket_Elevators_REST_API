@@ -21,7 +21,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         // Get full list of leads                                    
-        // https://localhost:3000/api/lead/all
+        // https://localhost:5000/api/lead/all
         // GET: api/lead/all           
         [HttpGet("all")]
         public IEnumerable<Lead> GetLeads()
@@ -34,7 +34,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         // Retrieve list of Leads created in the last 30 days who have not yet become customers                                                       https://localhost:5001/api/lead/notcustomers
-        // https://localhost:3000/api/lead/noncustomers
+        // https://localhost:5000/api/lead/noncustomers
         // GET: api/lead         
         [HttpGet("noncustomers")]
         public IEnumerable<Lead> GetNonCustomers()

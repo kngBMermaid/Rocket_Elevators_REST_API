@@ -41,9 +41,23 @@ namespace RocketElevatorsAPI.Controllers
         [HttpGet("noncustomers")]
         public IEnumerable<Lead> GetNonCustomers()
         {
-            IQueryable<Lead> leads = _context.Leads;
-            var nonCustomers = leads.Where(lead => lead.CreatedAt >= System.DateTime.UtcNow.AddDays(-30));
+            IQueryable<Lead> nonCustomers = 
+            from lead in _context.Leads
+            where !(from customer in _context.Customers
+                    select customer.EmailCompanyContact).Contains(lead.Email)
+            select lead;
             return nonCustomers.ToList();
+
+            /*lead.CreatedAt >= System.DateTime.Now.AddDays(-30)
+            select lead;
+            return nonCustomers.ToList();
+
+            /*
+            IEnumerable<Customer> customers = _context.Customers;
+
+            var nonCustomers = leads.Where(lead => lead.CreatedAt >= System.DateTime.UtcNow.AddDays(-30) && lead.Email != customers.);
+            return nonCustomers.ToList();
+            */
 
 
 

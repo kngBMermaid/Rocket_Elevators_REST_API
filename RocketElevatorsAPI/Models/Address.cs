@@ -48,10 +48,10 @@ namespace RocketElevatorsAPI.Models
         public DateTime UpdatedAt { get; set; }
 
         [Column("latitude")]
-        public int Latitude { get; set; }
+        public double Latitude { get; set; }
 
         [Column("longitude")]
-        public int Longitude { get; set; }
+        public double Longitude { get; set; }
 
     }
 }

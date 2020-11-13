@@ -45,6 +45,7 @@ namespace RocketElevatorsAPI.Controllers
             from lead in _context.Leads
             where !(from customer in _context.Customers
                     select customer.EmailCompanyContact).Contains(lead.Email)
+                    && lead.CreatedAt >= DateTime.UtcNow.AddDays(-30)
             select lead;
             return nonCustomers.ToList();
 

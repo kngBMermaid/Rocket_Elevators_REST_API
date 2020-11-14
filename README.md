@@ -2,88 +2,51 @@
 
 This repo contains all the code for the RESTful API in .NET Core from Week 8 of Odyssey.
 
+
+- The URL for this API deployed on Azure is : https://apirocketelevators.azurewebsites.net 
+
+A REST API
+
+In order to connect our information system to the equipment in operation throughout the territory served, we first need to develop a REST API using C # and .ASP NET. It will allow us to know and to manipulate the status of all the relevant entities of the operational database.
+
+>  To retrieve the status of a specific battery, column or elevator, use GET with one of the following  endpoints:
+
+  `/api/battery/{battery_id}`
+  `/api/column/{column_id}`
+  `/api/elevator/{elevator_id}`
+    
+    
+  > To change the status of a specific battery, column or elevator, use PUT with the following endpoints:
   
-
-    The URL for this API deployed on Azure is :
-
- - [ ] https://apirocketelevators.azurewebsites.net
-
-A REST Api
-
-In order to connect our information system to the equipment in operation throughout the territory served, we first need to develop a REST API using C # and .NET Core. It will allow us to know and to manipulate the status of all the relevant entities of the operational database.
-
+  `/api/battery/{battery_id}`
+  `/api/column/{column_id}`
+  `/api/elevator/{elevator_id}`
   
-
- 
-
-
-
-> Retrieving the current status of a specific Battery Changing the
-> status of a specific Battery
-
- - To retrieve the status of a specific battery, add
-   `/api/battery/(Battery ID)`
-   
- - To change the status of a specific battery, run the following in
-   PostMan
-    **{
-    "id": 1,
-    "status": "Innactive"
-    }**
-Where you put the ID of the Battery to modify, and the new status to give it.
-
-
-> Retrieving the current status of a specific Column Changing the status
-> of a specific Column
-
- 
-
-- To retrieve the status of a specific column, add 
-`/api/column/(Column ID)`
- to the API URL
- - To change the status of a specific column, run the following in
-   PostMan
-**{
-    "id": 1,
-    "status": "Innactive"
-    }**
-Where you put the ID of the Column to modify, and the new status to give it.
+  In Postman, in the Body section, you have to use raw JSON and give a value for the corresponding ID and the desired status. 
   
+  ![enter image description here](https://cdn.discordapp.com/attachments/752978810609336322/776998105496289330/Screenshot_204.png)
 
-> Retrieving the current status of a specific Elevator Changing the
-> status of a specific Elevator
+> Retrieving a list of Elevators that are not in operation at the time of the request
 
- - To retrieve the status of a specific elevator, add
-   `/api/elevator/(Elevator ID)`
-    to the API URL
- - To change the status of a specific elevator, run the following in
-   PostMan
-**{
-    "id": 1,
-    "status": "Innactive"
-    }**
-Where you put the ID of the Elevator to modify, and the new status to give it.
-  
+To retrieve this list, use GET with the following endpoint:
+  `/api/elevator/inoperational` 
 
-> Retrieving a list of Elevators that are not in operation at the time
-> of the request
+> Retrieving a list of Buildings that contain at least one battery, column or elevator requiring intervention
 
- - To retrieve this list, add 
-`/api/elevator/inoperational`
- to the API URL
-  
+To retrieve this list, use GET with the following endpoint: 
+`/api/building/intervention` 
 
-> Retrieving a list of Buildings that contain at least one battery,
-> column or elevator requiring intervention
+> Retrieving a list of Leads created in the last 30 days who have not yet become customers.
 
- - To retrieve this list, add 
- `/api/building/intervention`
- to the API URL
-  
-
-> Retrieving a list of Leads created in the last 30 days who have not   
-> yet become customers.
-
- - To retrieve this list, add
+To retrieve this list, use GET with the following endpoint:
  `/api/lead/noncustomers`
-   to the API URL
+
+## TEAM MEMBERS
+
+> Fabien Dimitrov "Team Leader"
+> 
+> Louis-David Marmen "Member"
+> 
+> William Jacques "Member"
+> 
+> Joey Coderre "Member"​

@@ -14,6 +14,20 @@ namespace RocketElevatorsAPI.Models
         [Key]
         public ulong Id { get; set; }
 
+        /*
+
+        [ForeignKey("admin_user_id")]
+        public ulong AdminUser_Id { get; set; }
+
+        [ForeignKey("address_id")]
+        public ulong Address_Id { get; set; }
+
+        [ForeignKey("employee_id")]
+        public ulong Employee_Id { get; set; }
+
+        */
+
+
         [Column("customer_creation_date")]
         public DateTime CustomerCreationDate { get; set; }
 
@@ -49,15 +63,5 @@ namespace RocketElevatorsAPI.Models
 
         [Column("updated_at")]
         public DateTime UpdatedAt { get; set; }
-
-        [ForeignKey("admin_user_id")]
-        public int AdminUserId { get; set; }
-
-        [ForeignKey("address_id")]
-        public int AddressId { get; set; }
-
-        [ForeignKey("employee_id")]
-        public int EmployeeId { get; set; }
-
     }
 }

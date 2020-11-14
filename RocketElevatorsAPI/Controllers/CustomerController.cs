@@ -30,6 +30,7 @@ namespace RocketElevatorsAPI.Controllers
             IQueryable<Customer> customers =
             from customer in _context.Customers
             select customer;
+            System.Console.WriteLine(customers);
             return customers.ToList();
 
         }

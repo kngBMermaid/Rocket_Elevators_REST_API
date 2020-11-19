@@ -1,4 +1,5 @@
-xzusing System.Collections.Generic;
+
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -32,84 +33,88 @@ namespace RocketElevatorsAPI.Controllers
 
         }
         [HttpGet("{id}")]
-        public IEnumerable<Intervention> GetInterventions(int id)
+        public string GetInterventions(ulong id)
         {
-            var interventions = await _context.interventions.FindAsync(id);
-
-            if (interventions == null)
-            {
-                return NotFound();
-            }
-        
-            return interventions;  // GET method to fetch Interventions data with ID
-        } 
-
-
-        [HttpGet("status")]
-       public IEnumerable<Intervention> GetInterventions()
-       {
-           IQueryable<InterventionItems> status = from intStatus in _context.interventions where intStatus.status == "Pending" || intStatus.intervention_datetime_start == null select intStatus;
-           return status;
+            var interventions = _context.Interventions.Where(intervention => intervention.Id == id).ToList();
+            return interventions[0].Status;
         }
-
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(int id, Interventions interventions)
-        {
-            if (id != interventions.id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(interventions).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InterventionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Ok(interventions);      
-        }
-
-        [HttpPut("begin/{id}")]
-
-        public string beginintervention(int id)
-        {
-            var intervention = _context.interventions.Find(id);
-            intervention.status = "In Progress";
-            intervention.intervention_datetime_start = DateTime.Now;
-            _context.interventions.Update(intervention);
-            _context.SaveChanges();
-            return "Intervention is now in progress";
-        }
-
-        [HttpPut("end/{id}")]
-
-        public string endintervention(int id)
-        {
-            var intervention = _context.interventions.Find(id);
-            intervention.result = "Completed";
-            intervention.status = "Completed";
-            intervention.intervention_datetime_end = DateTime.Now;
-            _context.interventions.Update(intervention);
-            _context.SaveChanges();
-            return "Intervention is completed";
-        }
-        private bool InterventionExists(int id)
-        {
-            return _context.interventions.Any(e => e.id == id);
-        }
-
     }
 }
+        // [HttpGet("{id}")]
+        // public IEnumerable<Intervention> GetInterventions(ulong id)
+        // {
+        //     var interventions = await _context.Interventions.FindAsync(id);
+
+        //     if (interventions == null)
+        //     {
+        //         return NotFound();
+        //     }
+        
+        //     return interventions; 
+        // } 
+
+    //     [HttpGet("status")]
+    //    public IEnumerable<Intervention> GetInterventions()
+    //    {
+    //        IQueryable<Intervention> status = from Status in _context.intervention where Status.status == "Pending" || Status.intervention_datetime_start == null select Status;
+    //        return status;
+    //     }
+
+
+    //     [HttpPut("{id}")]
+    //     public async Task<IActionResult> PutTodoItem(int id, Interventions interventions)
+    //     {
+    //         if (id != interventions.id)
+    //         {
+    //             return BadRequest();
+    //         }
+
+    //         _context.Entry(interventions).State = EntityState.Modified;
+
+    //         try
+    //         {
+    //             await _context.SaveChangesAsync();
+    //         }
+    //         catch (DbUpdateConcurrencyException)
+    //         {
+    //             if (!InterventionExists(id))
+    //             {
+    //                 return NotFound();
+    //             }
+    //             else
+    //             {
+    //                 throw;
+    //             }
+    //         }
+
+    //         return Ok(interventions);      
+    //     }
+
+    //     [HttpPut("begin/{id}")]
+
+    //     public string beginintervention(int id)
+    //     {
+    //         var intervention = _context.interventions.Find(id);
+    //         intervention.status = "In Progress";
+    //         intervention.intervention_datetime_start = DateTime.Now;
+    //         _context.interventions.Update(intervention);
+    //         _context.SaveChanges();
+    //         return "Intervention is now in progress";
+    //     }
+
+    //     [HttpPut("end/{id}")]
+
+    //     public string endintervention(int id)
+    //     {
+    //         var intervention = _context.interventions.Find(id);
+    //         intervention.result = "Completed";
+    //         intervention.status = "Completed";
+    //         intervention.intervention_datetime_end = DateTime.Now;
+    //         _context.interventions.Update(intervention);
+    //         _context.SaveChanges();
+    //         return "Intervention is completed";
+    //     }
+    //     private bool InterventionExists(int id)
+    //     {
+    //         return _context.interventions.Any(e => e.id == id);
+    //     }

@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RocketElevatorsAPI.Models;
 using RocketElevatorsAPI.Data;
@@ -31,6 +32,44 @@ namespace RocketElevatorsAPI.Controllers
             return interventions.ToList();
 
         }
+        [HttpGet("status")]
+        public IEnumerable<Intervention> GetIntervention()
+        {
+     
+           IQueryable<Intervention> status = from Status in _context.Interventions where Status.Status == "Pending" || Status.InterventionStart == null select Status;
+           return status;
+        }
+
+        [HttpPut("start/{id}")]
+
+        public string startintervention(ulong Id)
+        {
+            var intervention = _context.Interventions.Find(Id);
+            intervention.Status = "In Progress";
+            intervention.InterventionStart = DateTime.UtcNow;
+            _context.Interventions.Update(intervention);
+            _context.SaveChanges();
+            return "Intervention is now started";
+        }
+
+        [HttpPut("finish/{id}")]
+
+        public string endintervention(ulong Id)
+        {
+            var intervention = _context.Interventions.Find(Id);
+            intervention.Result = "Completed";
+            intervention.Status = "Completed";
+            intervention.InterventionStop = DateTime.UtcNow;
+            _context.Interventions.Update(intervention);
+            _context.SaveChanges();
+            return "Intervention is completed";
+        }
+        private bool InterventionExists(ulong Id)
+        {
+            return _context.Interventions.Any(e => e.Id == Id);
+        }
+
         
+      
     }
 }

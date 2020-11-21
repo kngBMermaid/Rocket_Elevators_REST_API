@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {}
+    "/home/mermaid/Week9/RestAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {}
   },
   "projects": {
-    "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {
+    "/home/mermaid/Week9/RestAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
+        "projectUniqueName": "/home/mermaid/Week9/RestAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
         "projectName": "RocketElevatorsAPI",
-        "projectPath": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
-        "packagesPath": "/home/god/.nuget/packages/",
-        "outputPath": "/home/god/REIS/Rocket_Elevators_REST/RocketElevatorsAPI/obj/",
+        "projectPath": "/home/mermaid/Week9/RestAPI/Rocket_Elevators_REST/RocketElevatorsAPI/RocketElevatorsAPI.csproj",
+        "packagesPath": "/home/mermaid/.nuget/packages/",
+        "outputPath": "/home/mermaid/Week9/RestAPI/Rocket_Elevators_REST/RocketElevatorsAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/god/.nuget/NuGet/NuGet.Config"
+          "/home/mermaid/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -24,6 +24,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -35,6 +36,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
@@ -85,6 +87,16 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.8, 3.1.8]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[3.1.9, 3.1.9]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -93,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.403/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }

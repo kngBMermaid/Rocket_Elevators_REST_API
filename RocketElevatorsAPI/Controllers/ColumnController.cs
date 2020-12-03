@@ -105,7 +105,7 @@ namespace RocketElevatorsAPI.Controllers
             List<Column> batteryColumns = new List<Column>();
             foreach(Column column in columnsAll)
             {
-                if ((column.Battery_Id) == id)
+                if (column.Battery_Id == id)
                 {
                     batteryColumns.Add(column);
                 }

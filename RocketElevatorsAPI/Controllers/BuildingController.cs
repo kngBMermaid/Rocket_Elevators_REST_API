@@ -61,7 +61,7 @@ namespace RocketElevatorsAPI.Controllers
             List<Building> customerBuildings = new List<Building>();
             foreach(Building building in buildingsAll)
             {
-                if ((building.Customer_Id) == id)
+                if (building.Customer_Id == id)
                 {
                     customerBuildings.Add(building);
                 }

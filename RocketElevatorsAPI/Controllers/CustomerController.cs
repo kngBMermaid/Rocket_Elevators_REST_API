@@ -41,7 +41,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> Getcustomers()
         {
-            return await _context.customers.ToListAsync();
+            return await _context.Customers.ToListAsync();
         }
 
       

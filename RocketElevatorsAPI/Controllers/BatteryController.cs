@@ -101,7 +101,7 @@ namespace RocketElevatorsAPI.Controllers {
         
             foreach(Battery battery in buildingsAll)
             {
-                if ((battery.building_id) == id)
+                if ((Battery.building_id) == id)
                 {
                     customerBuildings.Add(battery);
                 }

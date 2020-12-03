@@ -114,7 +114,7 @@ namespace RocketElevatorsAPI.Controllers
             List<Elevator> columnsElevators = new List<Elevator>();
             foreach(Elevator elevator in elevatorsAll)
             {
-                if ((elevator.column_id) == id)
+                if ((elevator.Column_id) == id)
                 {
                     columnsElevators.Add(elevator);
                 }

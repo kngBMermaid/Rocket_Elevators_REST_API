@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RocketElevatorsAPI.Models;
 using RocketElevatorsAPI.Data;
 

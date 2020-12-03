@@ -96,12 +96,12 @@ namespace RocketElevatorsAPI.Controllers {
         [HttpGet("specBattery/{id}")]
         public ActionResult<List<Battery>> GetBuildingBattery(long id)
         {
-            List<Battery> buildingsAll = _context.batteries.ToList();
+            List<Battery> buildingsAll = _context.Batteries.ToList();
             List<Battery> customerBuildings = new List<Battery>();
         
             foreach(Battery battery in buildingsAll)
             {
-                if ((battery.building_id) == id)
+                if ((battery.Building_id) == id)
                 {
                     customerBuildings.Add(battery);
                 }

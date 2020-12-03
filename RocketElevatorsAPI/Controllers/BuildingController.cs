@@ -57,7 +57,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpGet("specBuilding/{id}")]
         public ActionResult<List<Building>> GetCustomerBuilding(long id)
         {
-            List<Building> buildingsAll = _context.buildings.ToList();
+            List<Building> buildingsAll = _context.Buildings.ToList();
             List<Building> customerBuildings = new List<Building>();
             foreach(Building building in buildingsAll)
             {

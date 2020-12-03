@@ -101,7 +101,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpGet("specColumn/{id}")]
         public ActionResult<List<Column>> GetBatteryColumn(long id)
         {
-            List<Column> columnsAll = _context.columns.ToList();
+            List<Column> columnsAll = _context.Columns.ToList();
             List<Column> batteryColumns = new List<Column>();
             foreach(Column column in columnsAll)
             {

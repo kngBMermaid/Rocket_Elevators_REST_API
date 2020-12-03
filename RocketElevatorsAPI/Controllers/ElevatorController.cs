@@ -110,7 +110,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpGet("specElevator/{id}")]
         public ActionResult<List<Elevator>> GetColumnElevator(long id)
         {
-            List<Elevator> elevatorsAll = _context.elevators.ToList();
+            List<Elevator> elevatorsAll = _context.Elevators.ToList();
             List<Elevator> columnsElevators = new List<Elevator>();
             foreach(Elevator elevator in elevatorsAll)
             {

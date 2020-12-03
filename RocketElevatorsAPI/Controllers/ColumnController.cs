@@ -49,6 +49,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
 
+
         // Change status of specific column
         // http://localhost:5000/api/columns/{id}
         // PUT api/columns/{id}
@@ -96,5 +97,23 @@ namespace RocketElevatorsAPI.Controllers
             var dbColumn = _context.Columns.FirstOrDefault(column => column.Id == id);
             return Content("Status of Column with ID #" + dbColumn.Id + ": changed status to " + dbColumn.Status);
         }
+
+        [HttpGet("specColumn/{id}")]
+        public ActionResult<List<Column>> GetBatteryColumn(long id)
+        {
+            List<Column> columnsAll = _context.columns.ToList();
+            List<Column> batteryColumns = new List<Column>();
+            foreach(Column column in columnsAll)
+            {
+                if ((column.battery_id) == id)
+                {
+                    batteryColumns.Add(column);
+                }
+            }
+            return batteryColumns;
+
+        }     
+
     }
+
 }

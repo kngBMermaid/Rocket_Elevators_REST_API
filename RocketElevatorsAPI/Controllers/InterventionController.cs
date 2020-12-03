@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RocketElevatorsAPI.Models;
 using RocketElevatorsAPI.Data;
 
+
 namespace RocketElevatorsAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -69,7 +70,18 @@ namespace RocketElevatorsAPI.Controllers
             return _context.Interventions.Any(e => e.Id == Id);
         }
 
-        
+        [HttpGet("Customer/{customer_id}")]
+        public async Task<ActionResult<Intervention>> GetCustomer(long customer_id)
+        {
+            var intervention = await _context.interventions.FindAsync(customer_id);
+
+            if (intervention == null)
+            {
+                return NotFound();
+            }
+
+            return intervention;
+        }
       
     }
 }

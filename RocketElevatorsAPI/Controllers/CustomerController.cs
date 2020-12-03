@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using RocketElevatorsAPI.Models;
 using RocketElevatorsAPI.Data;
 
+
+
 namespace RocketElevatorsAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -33,6 +35,51 @@ namespace RocketElevatorsAPI.Controllers
             System.Console.WriteLine(customers);
             return customers.ToList();
 
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Customer>>> Getcustomers()
+        {
+            return await _context.customers.ToListAsync();
+        }
+
+      
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCustomer(long id, Customer customer)
+        {
+            if (id != customer.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(customer).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CustomerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+    
+        [HttpPost]
+        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        {
+            _context.customers.Add(customer);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
     }
 }

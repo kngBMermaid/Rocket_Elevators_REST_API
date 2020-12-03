@@ -107,5 +107,20 @@ namespace RocketElevatorsAPI.Controllers
             var dbElevator = _context.Elevators.FirstOrDefault(elevator => elevator.Id == id);          
             return  Content("Status of Elevator with ID #" + elevator.Id + ": changed status to " + elevator.Status);  
         }
+        [HttpGet("specElevator/{id}")]
+        public ActionResult<List<Elevator>> GetColumnElevator(long id)
+        {
+            List<Elevator> elevatorsAll = _context.elevators.ToList();
+            List<Elevator> columnsElevators = new List<Elevator>();
+            foreach(Elevator elevator in elevatorsAll)
+            {
+                if ((elevator.column_id) == id)
+                {
+                    columnsElevators.Add(elevator);
+                }
+            }
+            return columnsElevators;
+
+        } 
     }
 }

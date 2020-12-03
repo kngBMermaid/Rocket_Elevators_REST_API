@@ -54,7 +54,21 @@ namespace RocketElevatorsAPI.Controllers
             return buildings.ToList().Distinct();
             
         }
+        [HttpGet("specBuilding/{id}")]
+        public ActionResult<List<Building>> GetCustomerBuilding(long id)
+        {
+            List<Building> buildingsAll = _context.buildings.ToList();
+            List<Building> customerBuildings = new List<Building>();
+            foreach(Building building in buildingsAll)
+            {
+                if ((building.customer_id) == id)
+                {
+                    customerBuildings.Add(building);
+                }
+            }
+            return customerBuildings;
 
+        } 
 
 
     }

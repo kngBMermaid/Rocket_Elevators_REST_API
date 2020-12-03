@@ -93,6 +93,22 @@ namespace RocketElevatorsAPI.Controllers {
             return  Content("Status of Battery with ID #" + dbBattery.Id + ": changed status to " + dbBattery.Status);  
         }
 
+        [HttpGet("specBattery/{id}")]
+        public ActionResult<List<Battery>> GetBuildingBattery(long id)
+        {
+            List<Battery> buildingsAll = _context.batteries.ToList();
+            List<Battery> customerBuildings = new List<Battery>();
+        
+            foreach(Battery battery in buildingsAll)
+            {
+                if ((battery.building_id) == id)
+                {
+                    customerBuildings.Add(battery);
+                }
+            }
+            return customerBuildings;
+
+        }     
 
     }
 

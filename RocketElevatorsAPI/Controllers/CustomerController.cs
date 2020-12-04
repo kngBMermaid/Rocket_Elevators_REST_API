@@ -51,7 +51,7 @@ namespace RocketElevatorsAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(long id, Customer customer)
         {
-            if (id != customer.Id)
+            if ((ulong)id != customer.Id)
             {
                 return BadRequest();
             }

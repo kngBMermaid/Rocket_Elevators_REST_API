@@ -86,5 +86,10 @@ namespace RocketElevatorsAPI.Controllers
 
             return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         }
+        
+        private bool CustomerExists(long id)
+        {
+            return _context.Customers.Any(e => (long)e.Id == id);
+        }
     }
 }

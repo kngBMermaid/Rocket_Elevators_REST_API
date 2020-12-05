@@ -73,7 +73,7 @@ namespace RocketElevatorsAPI.Controllers
         }
 
         [HttpGet("Customer/{customer_id}")]
-        public async Task<ActionResult<Intervention>> GetCustomer(long customer_id)
+        public async Task<ActionResult<Intervention>> GetIntervention(long customer_id)
         {
             var intervention = await _context.Interventions.FindAsync(customer_id);
 
